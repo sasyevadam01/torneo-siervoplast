@@ -156,7 +156,13 @@ export default function Sorteggio() {
           key={rivelazione.e.id}
           fase={rivelazione.fase}
           e={rivelazione.e}
-          nomi={giocatori.filter((g) => g.fascia === giocatore(rivelazione.e.giocatore_id)?.fascia).map((g) => g.nome)}
+          nomi={giocatori
+            .filter(
+              (g) =>
+                g.fascia === giocatore(rivelazione.e.giocatore_id)?.fascia &&
+                (!g.squadra_id || g.id === rivelazione.e.giocatore_id),
+            )
+            .map((g) => g.nome)}
           onChiudi={() => rivelazione.fase === 'svela' && setRivelazione(null)}
           squadraNome={squadra(rivelazione.e.squadra_id)?.nome ?? ''}
         />
@@ -202,7 +208,7 @@ function Rivelazione({
   )
 
   return (
-    <div className={'rivelazione ' + fase} style={{ ['--colore' as string]: s?.colore ?? '#fff' }} onClick={onChiudi}>
+    <div className={'rivelazione fase-' + fase} style={{ ['--colore' as string]: s?.colore ?? '#fff' }} onClick={onChiudi}>
       {fase === 'mescola' ? (
         <div className="mescola">
           <p className="sopratitolo">Estrazione in corso…</p>

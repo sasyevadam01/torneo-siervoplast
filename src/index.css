@@ -543,23 +543,33 @@ h3 {
 }
 .lato {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 5px;
   min-width: 0;
-  font-weight: 600;
+  text-align: center;
 }
-.lato.casa {
-  justify-content: flex-end;
-  text-align: right;
+.lato .logo,
+.lato .logo-vuoto {
+  order: -1;
 }
 .lato .nome {
+  max-width: 100%;
+  font-family: var(--font-titoli);
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 .lato.perde {
   color: var(--tenue);
-  font-weight: 500;
+}
+.lato.perde .logo {
+  opacity: 0.6;
 }
 .punteggio,
 .ora {
@@ -1272,7 +1282,7 @@ table.classifica {
   overflow: hidden;
   padding: 20px;
 }
-.rivelazione.svela {
+.rivelazione.fase-svela {
   background:
     radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--colore) 55%, transparent), transparent 60%),
     rgba(5, 8, 7, 0.95);

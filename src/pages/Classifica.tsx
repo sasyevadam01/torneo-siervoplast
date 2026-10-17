@@ -86,7 +86,7 @@ function Accoppiamento({ p, titolo }: { p: Partita; titolo: string }) {
     <Link to={`/partita/${p.id}`} className="accoppiamento">
       <span className="acc-titolo">{titolo}</span>
       {lati.map((l) => (
-        <div key={l.lato} className={'acc-riga' + (v && v !== l.id ? ' perde' : '') + (v === l.id ? ' vince' : '')}>
+        <div key={l.lato} className={'acc-riga' + (v && v !== l.id ? ' perde' : '') + (v && v === l.id ? ' vince' : '')}>
           <Logo squadra={l.s} size={22} />
           <span className="nome">{l.s?.nome ?? segnaposto(p, l.lato)}</span>
           {p.stato !== 'programmata' && (

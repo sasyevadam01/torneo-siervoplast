@@ -30,7 +30,9 @@ const VOCI = [
 export default function Layout() {
   const { errore } = useTorneo()
   const { pathname } = useLocation()
-  useEffect(() => window.scrollTo(0, 0), [pathname])
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
 
   return (
     <div className="app">

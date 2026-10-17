@@ -132,9 +132,9 @@ create or replace function public.torneo(codice text) returns json language plpg
 declare org text; ok boolean;
 begin
   if privato.bloccato() then return json_build_object('errore', 'Troppi tentativi errati: riprova tra 15 minuti'); end if;
-  ok := exists (select 1 from public.accesso a where upper(a.codice) = upper(trim(codice)));
+  ok := exists (select 1 from public.accesso a where upper(a.codice) = upper(trim(torneo.codice)));
   if not ok then
-    org := privato.nome_organizzatore(codice);
+    org := privato.nome_organizzatore(torneo.codice);
     ok := org is not null;
   end if;
   if not ok then
