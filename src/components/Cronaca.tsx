@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useTorneo } from '../lib/torneo'
 import type { Evento, Partita } from '../lib/types'
 
@@ -33,7 +34,13 @@ export default function Cronaca({
             <span className="minuto">{e.minuto != null ? `${e.minuto}'` : ''}</span>
             <span className={'evento-icona ' + e.tipo}>{ICONA[e.tipo]}</span>
             <span className="evento-testo">
-              <strong>{g?.nome ?? '—'}</strong>
+              {g && !onElimina ? (
+                <Link to={`/giocatore/${g.id}`} className="link-giocatore">
+                  <strong>{g.nome}</strong>
+                </Link>
+              ) : (
+                <strong>{g?.nome ?? '—'}</strong>
+              )}
               {e.tipo === 'autogol' && <small>autogol</small>}
               {e.tipo === 'gol' && a && <small>assist {a.nome}</small>}
               {e.tipo === 'giallo' && <small>ammonito</small>}

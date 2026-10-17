@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react'
+import { Link } from 'react-router-dom'
 import { useTorneo } from '../../lib/torneo'
 import { messaggioErrore } from '../../lib/supabase'
 import { preparaFoto } from '../../lib/immagini'
@@ -122,6 +123,9 @@ function SchedaGiocatore({ g, onChiudi }: { g: Giocatore; onChiudi: () => void }
           </div>
         </div>
         <p className="nota">Carica la foto solo se la persona ha firmato il consenso.</p>
+        <Link to={`/giocatore/${g.id}`} className="btn btn-pieno">
+          Apri profilo e modifica carta (abilità, soprannome)
+        </Link>
 
         <label className="campo">
           <span>Nome</span>

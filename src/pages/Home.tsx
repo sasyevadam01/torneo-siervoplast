@@ -108,12 +108,12 @@ export default function Home() {
         <Sezione titolo="Capocannonieri" azione={<Link to="/statistiche">Tutte le stats</Link>}>
           <div className="podio">
             {bomber.map((s, i) => (
-              <div key={s.giocatore.id} className={'podio-voce p' + (i + 1)}>
+              <Link to={`/giocatore/${s.giocatore.id}`} key={s.giocatore.id} className={'podio-voce p' + (i + 1)}>
                 <Avatar giocatore={s.giocatore} size={i === 0 ? 64 : 52} />
                 <strong>{s.giocatore.nome}</strong>
                 <span className="testo-tenue">{squadra(s.giocatore.squadra_id)?.nome}</span>
                 <span className="podio-valore">{s.gol}</span>
-              </div>
+              </Link>
             ))}
           </div>
         </Sezione>

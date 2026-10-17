@@ -20,7 +20,12 @@ export interface Giocatore {
   fisso: boolean
   numero: number | null
   foto_path: string | null
+  soprannome: string | null
+  ruolo: Ruolo | null
+  abilita: number[] | null
 }
+
+export type Ruolo = 'POR' | 'DIF' | 'CEN' | 'ATT'
 
 export interface Partita {
   id: string

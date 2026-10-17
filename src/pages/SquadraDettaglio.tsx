@@ -58,6 +58,7 @@ export default function SquadraDettaglio() {
           <ul className="lista-rosa">
             {rosa.map((x) => (
               <li key={x.giocatore.id}>
+                <Link to={`/giocatore/${x.giocatore.id}`} className="link-giocatore" style={{ display: 'contents' }}>
                 <Avatar giocatore={x.giocatore} size={44} />
                 <div className="chi">
                   <strong>
@@ -71,6 +72,7 @@ export default function SquadraDettaglio() {
                     {x.rossi > 0 && <span className="cartellino rosso piccolo">{x.rossi}</span>}
                   </span>
                 </div>
+                </Link>
               </li>
             ))}
           </ul>

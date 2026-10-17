@@ -11,6 +11,8 @@ import Statistiche from './pages/Statistiche'
 import Squadre from './pages/Squadre'
 import SquadraDettaglio from './pages/SquadraDettaglio'
 import Sorteggio from './pages/Sorteggio'
+import Giocatore from './pages/Giocatore'
+import Giocatori from './pages/Giocatori'
 import LoginOrganizzatore from './pages/admin/Login'
 import Pannello from './pages/admin/Pannello'
 import GestionePartita from './pages/admin/GestionePartita'
@@ -30,6 +32,8 @@ function Rotte() {
         <Route path="statistiche" element={<Statistiche />} />
         <Route path="squadre" element={<Squadre />} />
         <Route path="squadre/:id" element={<SquadraDettaglio />} />
+        <Route path="giocatori" element={<Giocatori />} />
+        <Route path="giocatore/:id" element={<Giocatore />} />
         <Route path="admin" element={organizzatore ? <Pannello /> : <LoginOrganizzatore />} />
         <Route path="admin/partita/:id" element={organizzatore ? <GestionePartita /> : <Navigate to="/admin" replace />} />
       </Route>

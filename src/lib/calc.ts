@@ -121,3 +121,41 @@ export function iniziali(nome: string): string {
 
 // Le fasce sono riservate agli organizzatori: al pubblico si mostrano come "urne"
 export const NOME_URNA: Record<string, string> = { A: 'Urna 1', B: 'Urna 2', C: 'Urna 3', D: 'Urna 4', EXT: 'Esterni' }
+
+// ---------- Carta del giocatore ----------
+export const RUOLI: Record<string, string> = { POR: 'Portiere', DIF: 'Difensore', CEN: 'Centrocampista', ATT: 'Attaccante' }
+
+// Le 6 abilità sono salvate in ordine fisso; per il portiere cambiano solo le etichette
+const ETICHETTE_MOVIMENTO = [
+  ['VEL', 'Velocità'],
+  ['TIR', 'Tiro'],
+  ['PAS', 'Passaggio'],
+  ['DRI', 'Dribbling'],
+  ['DIF', 'Difesa'],
+  ['FIS', 'Fisico'],
+]
+const ETICHETTE_PORTIERE = [
+  ['TUF', 'Tuffo'],
+  ['PRE', 'Presa'],
+  ['RIN', 'Rinvio'],
+  ['RIF', 'Riflessi'],
+  ['VEL', 'Velocità'],
+  ['POS', 'Posizionamento'],
+]
+
+export function etichetteAbilita(ruolo: string | null): string[][] {
+  return ruolo === 'POR' ? ETICHETTE_PORTIERE : ETICHETTE_MOVIMENTO
+}
+
+export function valutazione(abilita: number[] | null): number | null {
+  if (!abilita || abilita.length !== 6) return null
+  return Math.round(abilita.reduce((a, b) => a + b, 0) / 6)
+}
+
+export type LivelloCarta = 'oro' | 'argento' | 'bronzo' | 'vuota'
+export function livelloCarta(v: number | null): LivelloCarta {
+  if (v == null) return 'vuota'
+  if (v >= 75) return 'oro'
+  if (v >= 65) return 'argento'
+  return 'bronzo'
+}

@@ -31,11 +31,13 @@ Deno.serve(async (req) => {
     let nuovoPercorso: string | null = null
     if (!rimuovi) {
       if (typeof immagine !== 'string') return risposta({ errore: 'Immagine mancante' }, 400)
+      // webp/png mantengono lo sfondo trasparente dei ritratti disegnati
+      const tipo = immagine.match(/^data:image\/(jpeg|png|webp);base64,/)?.[1] ?? 'jpeg'
       const base64 = immagine.replace(/^data:image\/\w+;base64,/, '')
       const bytes = Uint8Array.from(atob(base64), (c) => c.charCodeAt(0))
       if (bytes.length > 1_500_000) return risposta({ errore: 'Immagine troppo grande' }, 413)
-      nuovoPercorso = `${g.id}/${crypto.randomUUID()}.jpg`
-      const up = await db.storage.from('foto').upload(nuovoPercorso, bytes, { contentType: 'image/jpeg' })
+      nuovoPercorso = `${g.id}/${crypto.randomUUID()}.${tipo === 'jpeg' ? 'jpg' : tipo}`
+      const up = await db.storage.from('foto').upload(nuovoPercorso, bytes, { contentType: `image/${tipo}` })
       if (up.error) return risposta({ errore: up.error.message }, 500)
     }
 

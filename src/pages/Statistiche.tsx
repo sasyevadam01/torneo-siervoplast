@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useTorneo } from '../lib/torneo'
 import { calcolaStatistiche } from '../lib/calc'
 import { Avatar, Logo, Vuoto } from '../components/ui'
@@ -52,12 +53,12 @@ export default function Statistiche() {
             <li key={s.giocatore.id} className={pos <= 3 ? 'top' : ''}>
               <span className="pos">{pos}</span>
               <Avatar giocatore={s.giocatore} size={40} />
-              <div className="chi">
+              <Link to={`/giocatore/${s.giocatore.id}`} className="chi link-giocatore">
                 <strong>{s.giocatore.nome}</strong>
                 <span>
                   <Logo squadra={sq} size={16} /> {sq?.nome ?? 'Svincolato'}
                 </span>
-              </div>
+              </Link>
               {scheda === 'cartellini' ? (
                 <span className="cartellini">
                   {s.gialli > 0 && (

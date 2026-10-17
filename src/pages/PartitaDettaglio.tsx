@@ -53,14 +53,14 @@ export default function PartitaDettaglio() {
       </div>
 
       {mvp && (
-        <div className="mvp-card">
+        <Link to={`/giocatore/${mvp.id}`} className="mvp-card">
           <Avatar giocatore={mvp} size={48} />
           <div>
             <p className="sopratitolo">Migliore in campo</p>
             <strong>{mvp.nome}</strong>
           </div>
           <span className="mvp-stella">★</span>
-        </div>
+        </Link>
       )}
 
       <Sezione titolo="Cronaca">
@@ -105,10 +105,12 @@ function Rosa({ squadra }: { squadra: Squadra }) {
           .filter((g) => g.squadra_id === squadra.id)
           .map((g) => (
             <li key={g.id}>
-              <Avatar giocatore={g} size={26} />
-              <span>
-                {g.numero != null && <b>{g.numero}</b>} {g.nome}
-              </span>
+              <Link to={`/giocatore/${g.id}`} className="link-giocatore" style={{ display: 'contents' }}>
+                <Avatar giocatore={g} size={26} />
+                <span>
+                  {g.numero != null && <b>{g.numero}</b>} {g.nome}
+                </span>
+              </Link>
             </li>
           ))}
       </ul>
